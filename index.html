@@ -6,8 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="main.js">
-        
-    </script>
+    <h1>Rock Paper Scissors</h1>
+
+    <p>Choose your fighter</p>
+    <button class="button" id="rock">Rock</button>
+    <button class="button" id="paper">Paper</button>
+    <button class="button" id="scissors">Scissors</button>
+
+    <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; gap: 5px;">
+            <p>Player: </p>
+            <p id="playerScore">0</p>
+        </div>
+    
+        <div style="display: flex; gap: 5px;">
+            <p>Computer: </p>
+            <p id="computerScore">0</p>
+        </div>
+    </div>
+
+    <p id="result"></p>
+    <p id="gameOver"></p>
+
+    <script src="main.js"></script>
 </body>
 </html>

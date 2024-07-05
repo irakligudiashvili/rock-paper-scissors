@@ -16,30 +16,21 @@ function getComputerChoice(){
     console.log("Error; roll: " + roll);
 }
 
-function getHumanChoice(prompt){
-    let choice = window.prompt("Choose Rock, Paper or Scissors");
-
-    
-    choice = choice.toLocaleLowerCase();
-
-    if(choice !== "rock" && choice !== "scissors" && choice !== "paper"){
-        getHumanChoice();
-    }
-
-    console.log("Human chose: " + choice);
-
-    return choice;
-}
-
 let humanScore = 0;
 let computerScore = 0;
+const result = document.getElementById("result");
+const gameOver = document.getElementById("gameOver");
+let canPlay = true;
 
-function playRound(){
-    const humanChoice = getHumanChoice();
+function playRound(playerChoice){
+    if(!canPlay) {
+        return;
+    }
+    const humanChoice = playerChoice;
     const computerChoice = getComputerChoice();
 
     if(humanChoice == computerChoice){
-        console.log("Draw");
+        result.innerHTML = "Draw";
     } else if(humanChoice == "rock"){
         if(computerChoice == "paper"){
             computerWin();
@@ -62,27 +53,50 @@ function playRound(){
 
     console.log("Player: " + humanScore + " Computer: " + computerScore);
 
-    if(humanScore < 5 && computerScore < 5){
-        playRound();
-    } else {
+    if(humanScore >= 5 || computerScore >= 5){
         if(humanScore > computerScore){
-            console.log("Player wins the game");
+            gameOver.innerHTML = "Game Over! Player wins";
+            canPlay = false;
         } else {
-            console.log("Computer wins the game");
+            gameOver.innerHTML = "Game Over! Computer wins";
+            canPlay = false;
         }
     }
+
+    const playerScoreP = document.getElementById("playerScore");
+    const computerScoreP = document.getElementById("computerScore");
+    
+
+
+
+    playerScoreP.innerHTML = humanScore;
+    computerScoreP.innerHTML = computerScore;
 }
 
 function computerWin(){
     computerScore++;
     console.log("Computer wins");
+    result.innerHTML = "Computer wins";
 }
 
 function playerWin(){
     humanScore++;
     console.log("Player wins");
+    result.innerHTML = "Player wins";
 }
 
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissors = document.getElementById("scissors");
 
+rock.addEventListener("click", () => {
+    playRound("rock");
+})
 
-playRound();
+paper.addEventListener("click", () => {
+    playRound("paper");
+})
+
+scissors.addEventListener("click", () => {
+    playRound("scissors");
+})
